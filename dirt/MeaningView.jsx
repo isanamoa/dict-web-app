@@ -2,7 +2,7 @@ import { Box, Divider,
     Typography, List, ListSubheader, ListItem } from "@mui/material"
 
 
-const Nouns = () => {
+const MeaningView = ({ meaning }) => {
   return (
     <Box className="my-3">
             <Box>
@@ -10,7 +10,7 @@ const Nouns = () => {
                 <Typography variant="body2"
                     className="text-[1.125rem] font-bold"
                 >
-                    noun
+                    {meaning.partOfSpeech ?? 'noun'}
                 </Typography>
             
                 <Box >
@@ -36,27 +36,35 @@ const Nouns = () => {
                         Meaning
                     </ListSubheader>
                     <ListItem>
-                        {`(etc.) A set of keys used to operate a 
-                        typewriter, computer etc.`}
+                        { (meaning && meaning.definitions.definition)  || `(etc.) A set of keys used to operate a 
+                        typewriter, computer etc.` }
                     </ListItem>
                     <ListItem>
-                        {`A component of many instruments including the piano, organ, 
+                        { (meaning && meaning.definitions.example) || `A component of many instruments including the piano, organ, 
                         and harpsichord consisting of usually black and white keys that cause 
                         different tones to be produced when struck.`}
                     </ListItem>
-                    <ListItem>
+
+                    {/*<ListItem>
                         {`A device with keys of a musical keyboard, 
                         used to control electronic 
                         sound-producing devices which may be built 
                         into or separate from the keyboard device.`}
-                    </ListItem>
+                    </ListItem>*/}
                 </List>
             </Box>
             
             <Box className="mt-2 sm:w-1/4 text-[1rem]">
                 <Typography component='div' className="flex gap-5 justify-start items-center" >
                     <span>{'Synonyms'}</span>
-                    <span className="text-[#A445ED]">{'electronic keyboard'}</span>
+                    {
+                        meaning.definitions.synonyms?.map((synonym, index)=>(
+                            <span key={index} className="text-[#A445ED]">{synonym}</span>
+                        )) 
+                        ??
+                        <span className="text-[#A445ED]">{'electronic keyboard'}</span>
+
+                    }
                 </Typography>
             </Box>
 
@@ -64,4 +72,4 @@ const Nouns = () => {
   )
 }
 
-export default Nouns
+export default MeaningView;

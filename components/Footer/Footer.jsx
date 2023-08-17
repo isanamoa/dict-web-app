@@ -1,15 +1,17 @@
-import { Box, Divider, IconButton, Tooltip, Typography } from "@mui/material"
+import { Box, Divider, IconButton, Link, Tooltip, Typography } from "@mui/material"
 
-const Footer = () => {
+const Footer = ({ sourceUrl }) => {
+
   return (
     <Box className="w-full mt-2 mb-5 text-[0.875rem]">
       <Divider />
       <Typography className="mt-3 underline">
         {'Source'}
       </Typography>
-        <Typography>
-          {'https://en.wiktionary.org/wiki/keyboard'}
-          <Tooltip title="Open in new tab">
+      <Typography>
+        {sourceUrl}
+        <Link className="underline-none" href={sourceUrl} target="_blank"> 
+          <Tooltip title="Open link in new tab">
             <IconButton>
               <Box 
                 component='img'
@@ -19,8 +21,8 @@ const Footer = () => {
               />
             </IconButton>
           </Tooltip>
-        </Typography>
-        
+        </Link>
+      </Typography>    
     </Box>
   )
 }

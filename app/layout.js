@@ -23,7 +23,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${lora.variable} ${incons.variable} font-sans font-serifs font-mono`}>{children}</body>
+      <body className={`${inter.variable} 
+        font-sans ${lora.variable} 
+        font-serifs ${incons.variable} font-mono`}>
+        {children}
+      </body>
     </html>
   )
 }

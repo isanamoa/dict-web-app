@@ -1,17 +1,19 @@
 'use client';
+import React, { useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Box, CssBaseline } from "@mui/material";
+import { Box, CssBaseline, CircularProgress } from "@mui/material";
 import MainView from "@/components/Body/MainView";
-import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
-import { useState } from 'react';
 import SearchBar from '@/components/Body/SearchBar';
-
+import useDictionary from "@/api/useDictionary";
 
 export default function Home() {
   const [themeMode, setThemeMode] = useState(false)
   const [dfont, setDfont] = useState('');
-  
+
+  const dictionaryData = useDictionary();
+  const { isloading, wordData, fetchWord } = dictionaryData;
+
   const handleThemeChange = () => {
     setThemeMode(prev=>!prev);
   };
@@ -41,15 +43,23 @@ export default function Home() {
   return (
     <ThemeProvider theme={customTheme}>
       <CssBaseline />
-      <Box className={`min-h-screen flex flex-col 
-          items-center justify-between p-5 font-${dfont}`}>
+        <Box className={`w-full lg:w-[46rem] lg:mx-auto min-h-screen flex flex-col 
+            items-center justify-between p-5 md:py-6 md:px-10 font-${dfont}`}>
 
-        <Header headData={{themeMode, dfont, handleThemeChange, handleFontChange}} />
-        <SearchBar searchData={{themeMode}} />
-        <MainView />
-        <Footer />
+          <Header headData={{themeMode, dfont, handleThemeChange, handleFontChange}} />
+          <SearchBar searchData={{fetchWord}} />
 
-      </Box>
+          {
+            isloading ?
+            <Box sx={{ width: 1, mt:3, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <CircularProgress />
+            </Box>
+            :
+            <MainView wordData={wordData}/>
+          }
+
+        </Box>
+      
     </ThemeProvider>
   )
 }

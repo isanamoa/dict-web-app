@@ -1,36 +1,54 @@
-import { Box, Divider, 
-    Typography, List, ListSubheader, ListItem } from "@mui/material"
-import Nouns from "./Nouns"
-import Verbs from "./Verbs"
+import { Box, Typography, CardMedia, Tooltip } from "@mui/material"
+import MeaningView from "./MeaningView";
+import Footer from "../Footer/Footer";
+import { useState } from "react";
 
+const MainView = ({wordData}) => {
+    const [playPhonetic, setPlayPhonetic] = useState(false)
+    //console.log('This is word', wordData[0].phonetics.filter(value => value.audio != '')[0].audio);
 
-const MainView = () => {
-  return (
+ return (
     <Box className="w-full mt-6">
-        <Box className="flex justify-between items-center">
-            <Box>
-                <Typography variant="h4"
-                    className="text-[2rem] font-bold"
-                >
-                    {'keyboard'}
-                </Typography>
-                <Typography variant="body2"
-                    className="text-[1.125rem] text-[#A445ED]"
-                >
-                    {'/ˈkiːbɔːd/'}
-                </Typography>
+        <Box>
+            <Box className="flex justify-between items-center">
+                <Box>
+                    <Typography variant="h4"
+                        className="text-[2rem] md:text-[4rem] font-bold"
+                    >
+                        {wordData && (wordData[0]?.word.charAt(0).toUpperCase() + wordData[0]?.word.slice(1))}
+                    </Typography>
+                    <Typography variant="body2"
+                        className="text-[1.125rem] md:text-[1.5rem] text-[#A445ED]"
+                    >
+                        {wordData && wordData[0]?.phonetic}
+                    </Typography>
+                </Box>
+                <Tooltip title="Click to play sound">
+                   <Box 
+                        component='img'
+                        alt="play"
+                        src="/assets/images/icon-play.svg"
+                        className="w-12 h-12 flex items-start"
+                        onClick={()=>setPlayPhonetic(true)}
+                    /> 
+                </Tooltip>
+                
             </Box>
-            <Box 
-                component='img'
-                alt="play"
-                src="/assets/images/icon-play.svg"
-                className="w-12 h-12 flex items-start"
+            <CardMedia
+                component="audio" 
+                autoPlay={playPhonetic} 
+                controls 
+                src={wordData && wordData[0].phonetics.filter(value => value.audio != '')[0].audio}
+                sx={{display:`${playPhonetic ? 'block' : "none"}`}}
             />
         </Box>
 
-        <Nouns />
+        {
+            wordData && wordData[0].meanings?.map((meaning, index) => <MeaningView key={index} meaning={meaning} />)
+        }
+            
 
-        <Verbs />
+        <Footer sourceUrl={wordData && wordData[0].sourceUrls} />
         
     </Box>
   )
