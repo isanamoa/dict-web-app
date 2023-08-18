@@ -26,7 +26,10 @@ export default function RootLayout({ children }) {
       <body className={`${inter.variable} 
         font-sans ${lora.variable} 
         font-serifs ${incons.variable} font-mono`}>
-        {children}
+          <main className='w-full min-h-screen flex flex-col 
+            items-center justify-between'>
+            {children}
+          </main>
       </body>
     </html>
   )

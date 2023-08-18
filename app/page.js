@@ -6,14 +6,15 @@ import MainView from "@/components/Body/MainView";
 import Header from "@/components/Header/Header";
 import SearchBar from '@/components/Body/SearchBar';
 import useDictionary from "@/api/useDictionary";
+import ErrorControl from '@/components/Body/ErrorControl';
 
 export default function Home() {
   const [themeMode, setThemeMode] = useState(false)
   const [dfont, setDfont] = useState('');
 
   const dictionaryData = useDictionary();
-  const { isloading, wordData, fetchWord } = dictionaryData;
-
+  const { isloading, isError, isNotice, wordData, fetchWord } = dictionaryData;
+  console.log(wordData, isNotice)
   const handleThemeChange = () => {
     setThemeMode(prev=>!prev);
   };
@@ -43,8 +44,7 @@ export default function Home() {
   return (
     <ThemeProvider theme={customTheme}>
       <CssBaseline />
-        <Box className={`w-full lg:w-[46rem] lg:mx-auto min-h-screen flex flex-col 
-            items-center justify-between p-5 md:py-6 md:px-10 font-${dfont}`}>
+        <Box className={`w-full lg:w-[46rem] lg:mx-auto p-5 md:py-6 md:px-10 font-${dfont}`}>
 
           <Header headData={{themeMode, dfont, handleThemeChange, handleFontChange}} />
           <SearchBar searchData={{fetchWord}} />
@@ -55,7 +55,12 @@ export default function Home() {
               <CircularProgress />
             </Box>
             :
-            <MainView wordData={wordData}/>
+            (
+              isNotice ? 
+              <ErrorControl wordData={wordData} />
+              :
+              <MainView wordData={wordData}/>
+            )
           }
 
         </Box>

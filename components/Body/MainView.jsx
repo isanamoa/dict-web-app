@@ -34,13 +34,19 @@ const MainView = ({wordData}) => {
                 </Tooltip>
                 
             </Box>
-            <CardMedia
+            {   
+                (wordData && wordData[0].phonetics.length > 0) 
+                && 
+                <CardMedia
                 component="audio" 
                 autoPlay={playPhonetic} 
                 controls 
-                src={wordData && wordData[0].phonetics.filter(value => value.audio != '')[0].audio}
+                src={ 
+                        wordData[0].phonetics?.filter(value => value.audio != '')[0].audio
+                    }
                 sx={{display:`${playPhonetic ? 'block' : "none"}`}}
             />
+            }
         </Box>
 
         {
