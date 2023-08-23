@@ -10,11 +10,11 @@ import ErrorControl from '@/components/Body/ErrorControl';
 
 export default function Home() {
   const [themeMode, setThemeMode] = useState(false)
-  const [dfont, setDfont] = useState('');
+  const [dfont, setDfont] = useState('sans');
 
   const dictionaryData = useDictionary();
-  const { isloading, isError, isNotice, wordData, fetchWord } = dictionaryData;
-  console.log(wordData, isNotice)
+  const { isloading, isNotice, wordData, fetchWord } = dictionaryData;
+
   const handleThemeChange = () => {
     setThemeMode(prev=>!prev);
   };
@@ -47,7 +47,7 @@ export default function Home() {
         <Box className={`w-full lg:w-[46rem] lg:mx-auto p-5 md:py-6 md:px-10 font-${dfont}`}>
 
           <Header headData={{themeMode, dfont, handleThemeChange, handleFontChange}} />
-          <SearchBar searchData={{fetchWord}} />
+          <SearchBar searchData={{ themeMode, fetchWord}} />
 
           {
             isloading ?

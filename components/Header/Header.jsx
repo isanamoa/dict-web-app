@@ -1,5 +1,5 @@
-import { Box, Switch, FormControl, 
-    InputLabel, MenuItem, Select  } from "@mui/material"
+import { Box, Divider, 
+     MenuItem, Select  } from "@mui/material"
 
 
 const Header = ({ headData }) => {
@@ -11,36 +11,40 @@ const Header = ({ headData }) => {
         component='img'
         alt="book"
         src="/assets/images/logo.svg"
-        className="w-7 h-8"
+        className="w-[1.753rem] h-8 md:w-8 md:h-[2.281rem]"
       />
 
       <Box className="flex gap-1 items-center justify-between">
-        <Box>
-            <FormControl size="small" className="w-20 h-9 p-0 sm:w-32 m-1 text-[0.875rem]">
-                <InputLabel id="font-label">Font</InputLabel>
-                <Select
-                    labelId="font-label"
-                    value={dfont}
-                    label="Font"
-                    onChange={handleFontChange}
-                    size="small"                    
-                >
-                    <MenuItem value={'sans'}>San-Serif</MenuItem>
-                    <MenuItem value={'serifs'}>Serif</MenuItem>
-                    <MenuItem value={'mono'}>Mono</MenuItem>
-                </Select>
-            </FormControl>
+        <Box >
+          <Select
+              value={dfont}
+              onChange={handleFontChange}
+              size="small"  
+              className="w-auto h-9 p-0 sm:w-32 m-1 text-[0.875rem]"                  
+          >
+              <MenuItem value={'sans'}>San-Serif</MenuItem>
+              <MenuItem value={'serifs'}>Serif</MenuItem>
+              <MenuItem value={'mono'}>Mono</MenuItem>
+          </Select>
         </Box>
-        
-        <Box className="flex gap-0 items-center justify-between">
-            <Switch color="secondary" onClick={handleThemeChange}/>
+        <Divider orientation="vertical" flexItem sx={{bgcolor: '#E9E9E9'}} />
+        <Box className="flex gap-0 items-center text-[#A445ED] justify-between">
             {
-                !themeMode && 
+                themeMode && 
                 <Box 
                     component='img'
                     alt="moon"
-                    src="/assets/images/icon-moon.svg"
-                    className="w-5 h-5"
+                    src="/assets/images/Group-dark.svg"
+                    onClick={handleThemeChange}
+                    className="w-[71.993px] h-[20px] md:w-[79.993px]"
+
+                />
+                ||
+                <Box 
+                    component='img'
+                    alt="moon"
+                    src="/assets/images/Group.svg"
+                    onClick={handleThemeChange}
                 />
             }
         </Box>

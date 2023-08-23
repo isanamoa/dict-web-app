@@ -3,26 +3,30 @@ import { Box, Divider,
 
 
 const MeaningView = ({ meaning }) => {
-    //console.log(meaning.synonyms)
-  return (
+
+    return (
     <Box className="my-3">
             <Box>
+                <Box className="w-auto">
+                    <Typography variant="body2"
+                        className="text-[1.125rem] md:text-[1.5rem] font-bold"
+                    >
+                        {meaning.partOfSpeech}
+                    </Typography>
+                </Box>
             
-                <Typography variant="body2"
-                    className="text-[1.125rem] md:text-[1.5rem] font-bold"
-                >
-                    {meaning.partOfSpeech}
-                </Typography>
-            
-                <Box >
+                <Box className="w-auto" >
                     <Divider variant="inset" 
-                        className='relative bottom-4' 
+                        className='relative bottom-3' 
                     />
                 </Box>
             
             </Box>
 
             <Box className="mb-2 text-[0.938rem] md:text-[1.125rem]">
+                <Typography variant="body2" className="mt-5 text-[1rem] md:text-[1.25rem] text-[#757575]">
+                    Meaning
+                </Typography>
                 <List sx = {{
                         listStyleType: 'disc',
                         pl: 2,
@@ -32,25 +36,22 @@ const MeaningView = ({ meaning }) => {
                         },
                     }}
                 >
-                    <ListSubheader className="ml-0 text-[1rem] md:text-[1.25rem]">
-                        Meaning
-                    </ListSubheader>
-                    { meaning && meaning.definitions.map(value =>(
-                            <>
-                            <ListItem key={value.definition}>
-                                {value.definition}
-                            </ListItem>
-                            {value.example && <ListItem key={value.example}>
-                                { `"${value.example}"`}
-                            </ListItem>}
-                            </>
+                    { meaning && meaning.definitions.map((value, index) =>(
+                            <Box key={2 + index}>
+                                <ListItem>
+                                    {value.definition}
+                                </ListItem>
+                                {value.example && <ListItem>
+                                    { `"${value.example}"`}
+                                </ListItem>}
+                            </Box>
                         )) 
                     }
                 
                 </List>
             </Box>
             
-            <Box className="my-2 text-[1rem] md:text-[1.25rem]">
+            <Box className="mt-2 mb-5 text-[1rem] md:text-[1.25rem]">
                 {meaning.synonyms.length > 0  && 
                 <Typography component='div' className="flex gap-x-5 gap-y-2 justify-start items-center flex-wrap" >
                     <span>{'Synonyms'}</span>

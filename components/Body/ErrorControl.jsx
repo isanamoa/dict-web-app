@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material"
 
 const ErrorControl = ({ wordData }) => {
-    console.log(wordData)
-  return (
+
+    return (
     <Box sx={{ width:1,  mt:4, display: 'flex', 
             flexDirection: 'column',
             justifyContent: 'center',

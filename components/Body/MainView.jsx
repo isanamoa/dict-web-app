@@ -5,14 +5,13 @@ import { useState } from "react";
 
 const MainView = ({wordData}) => {
     const [playPhonetic, setPlayPhonetic] = useState(false)
-    //console.log('This is word', wordData[0].phonetics.filter(value => value.audio != '')[0].audio);
 
  return (
     <Box className="w-full mt-6">
         <Box>
             <Box className="flex justify-between items-center">
                 <Box>
-                    <Typography variant="h4"
+                    <Typography variant="h1"
                         className="text-[2rem] md:text-[4rem] font-bold"
                     >
                         {wordData && (wordData[0]?.word.charAt(0).toUpperCase() + wordData[0]?.word.slice(1))}
@@ -30,6 +29,7 @@ const MainView = ({wordData}) => {
                         src="/assets/images/icon-play.svg"
                         className="w-12 h-12 flex items-start"
                         onClick={()=>setPlayPhonetic(true)}
+                        sx={{'&:hover': '#A445ED'}}
                     /> 
                 </Tooltip>
                 

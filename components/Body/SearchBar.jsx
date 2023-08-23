@@ -1,10 +1,15 @@
 import { Box, TextField, InputAdornment, IconButton } from "@mui/material"
-//import useDictionary from "@/api/useDictionary";
 import { useState } from "react";
+ 
+const SearchBar = ({ searchData }) => {
+  const [newWord, setNewWorld] = useState('');
+  const [error, setError] = useState(false);
 
-
-const style = {
+  const style = {
   "& .MuiOutlinedInput-root": {
+    borderRadius: '16px',
+    boxShadow: 2,
+    bgcolor: `${searchData.themeMode && '#1F1F1F' || '#F4F4F4'}`,
     "&.Mui-focused fieldset": {
       borderColor: "#A445ED"
     },
@@ -12,13 +17,7 @@ const style = {
       borderColor: "#A445ED"
     }
   }
-} 
-const SearchBar = ({ searchData }) => {
-  const [newWord, setNewWorld] = useState('');
-  const [error, setError] = useState(false);
-
-  //const dictionaryData = useDictionary();
-  //const { fetchWord } = dictionaryData;
+}
   
   const handleChange = (e) => {
     setNewWorld(e.target.value);
@@ -29,12 +28,11 @@ const SearchBar = ({ searchData }) => {
     return newWord === '' ? setError(true) : searchData.fetchWord(newWord);
   }
 
-
   return (
     <Box component="form"  
       noValidate
       autoComplete="off"
-      className="w-full flex items-center mt-6 bg-transparent"
+      className="w-full flex items-center mt-6 rounded-2xl"
       onSubmit={handleSearch}
     >
       
