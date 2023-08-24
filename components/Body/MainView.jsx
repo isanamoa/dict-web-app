@@ -1,10 +1,20 @@
-import { Box, Typography, CardMedia, Tooltip } from "@mui/material"
+import { Box, Typography, CardMedia, Tooltip, IconButton } from "@mui/material"
 import MeaningView from "./MeaningView";
 import Footer from "../Footer/Footer";
 import { useState } from "react";
 
-const MainView = ({wordData}) => {
-    const [playPhonetic, setPlayPhonetic] = useState(false)
+const MainView = ({ mainData }) => {
+    const {themeMode, wordData} = mainData;
+    const [playPhonetic, setPlayPhonetic] = useState('')
+
+    const handlePlay = () =>{
+        wordData && wordData[0].phonetics?.length > 0 &&
+        setPlayPhonetic(wordData[0].phonetics?.filter(value => value.audio != '')[0]?.audio);
+        const playTime = setTimeout(() => {
+            setPlayPhonetic(prev=>!prev);
+        }, 1000);
+        return () => clearTimeout(playTime);
+    }
 
  return (
     <Box className="w-full mt-6">
@@ -22,31 +32,42 @@ const MainView = ({wordData}) => {
                         {wordData && wordData[0]?.phonetic}
                     </Typography>
                 </Box>
-                <Tooltip title="Click to play sound">
-                   <Box 
-                        component='img'
-                        alt="play"
-                        src="/assets/images/icon-play.svg"
-                        className="w-12 h-12 flex items-start"
-                        onClick={()=>setPlayPhonetic(true)}
-                        sx={{'&:hover': '#A445ED'}}
-                    /> 
-                </Tooltip>
-                
+                {
+                    wordData && wordData[0]?.phonetics?.length > 0 
+                    &&
+                    <Box sx={{position:"relative", }}>
+                            { 
+                                themeMode &&
+                                <Box 
+                                component='img'
+                                alt="play"
+                                src="/assets/images/playbutton-dark.svg"
+                                className="w-12 h-12 flex items-start"
+                                onClick={handlePlay}
+                                sx={{'&:hover': '#A445ED', position:'relative', zIndex: 1}}
+                                /> 
+                                ||
+                                <Box 
+                                component='img'
+                                alt="play"
+                                src="/assets/images/icon-play.svg"
+                                className="w-12 h-12 flex items-start"
+                                onClick={handlePlay}
+                                sx={{'&:hover': '#A445ED', position:'relative', zIndex: 1}}
+                                /> 
+                            }
+                            
+                            <CardMedia
+                            component="audio" 
+                            autoPlay
+                            src={playPhonetic}
+                            sx={{visibility: 'hidden', position:'absolute', zIndex: 0}}
+                            />
+                    </Box>
+                }
+                  
             </Box>
-            {   
-                (wordData && wordData[0].phonetics.length > 0) 
-                && 
-                <CardMedia
-                component="audio" 
-                autoPlay={playPhonetic} 
-                controls 
-                src={ 
-                        wordData[0].phonetics?.filter(value => value.audio != '')[0].audio
-                    }
-                sx={{display:`${playPhonetic ? 'block' : "none"}`}}
-            />
-            }
+            
         </Box>
 
         {

@@ -3,7 +3,8 @@ import { Box, Divider,
 
 
 const Header = ({ headData }) => {
-    const {themeMode, dfont, handleThemeChange, handleFontChange } = headData
+    const {themeMode, dfont, handleThemeChange, handleFontChange } = headData;
+    
   return (
     <Box className="w-full flex justify-between items-center">
       

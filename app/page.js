@@ -59,7 +59,7 @@ export default function Home() {
               isNotice ? 
               <ErrorControl wordData={wordData} />
               :
-              <MainView wordData={wordData}/>
+              <MainView mainData={{themeMode, wordData}}/>
             )
           }
 
