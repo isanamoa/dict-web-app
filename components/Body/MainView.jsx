@@ -22,7 +22,7 @@ const MainView = ({ mainData }) => {
             <Box className="flex justify-between items-center">
                 <Box>
                     <Typography variant="h1"
-                        className="text-[2rem] md:text-[4rem] font-bold"
+                        sx={{fontSize:{xs:"2rem", md:"4rem"}, fontWeight:700}}
                     >
                         {wordData && (wordData[0]?.word.charAt(0).toUpperCase() + wordData[0]?.word.slice(1))}
                     </Typography>
