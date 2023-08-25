@@ -21,11 +21,14 @@ const SearchBar = ({ searchData }) => {
   
   const handleChange = (e) => {
     setNewWorld(e.target.value);
+    setError(false);
   }
 
   const handleSearch = (e) => {
     e.preventDefault();
-    return newWord === '' ? setError(true) : searchData.fetchWord(newWord);
+    const searchWord = newWord === '' ? setError(true) : searchData.fetchWord(newWord);
+    setNewWorld('');
+    return searchWord;
   }
 
   return (

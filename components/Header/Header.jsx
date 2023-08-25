@@ -1,10 +1,11 @@
+import { DarkModeOutlined } from "@mui/icons-material";
 import { Box, Divider, 
-     MenuItem, Select  } from "@mui/material"
+     MenuItem, Select, Switch  } from "@mui/material"
 
 
 const Header = ({ headData }) => {
     const {themeMode, dfont, handleThemeChange, handleFontChange } = headData;
-    
+
   return (
     <Box className="w-full flex justify-between items-center">
       
@@ -18,10 +19,26 @@ const Header = ({ headData }) => {
       <Box className="flex gap-1 items-center justify-between">
         <Box >
           <Select
-              value={dfont}
-              onChange={handleFontChange}
-              size="small"  
-              className="w-auto h-9 p-0 sm:w-32 m-1 text-[0.875rem]"                  
+            value={dfont}
+            onChange={handleFontChange}
+            size="small"  
+            className="w-auto h-9 p-0 sm:w-32 m-1 text-[0.875rem]"  
+            MenuProps={{
+              PaperProps: {
+                sx: {
+                  mt:1,
+                  boxShadow:  `${themeMode &&  "0px 5px 3px -1px rgb(164,69,237), 0px 4px 4px 0px rgb(164,69,237), 0px 3px 7px 0px rgb(164,69,237)"}`,
+                  '& .MuiMenuItem-root': {
+                    '&:focus': {
+                      border: 'none',
+                      focus: 'none',
+                      bgcolor: 'transparent'
+                    },
+                    '&:hover': {color:'#A445ED', bgcolor: 'transparent',}
+                  },
+                },
+              },
+            }}                
           >
               <MenuItem value={'sans'}>San-Serif</MenuItem>
               <MenuItem value={'serifs'}>Serif</MenuItem>
@@ -29,8 +46,8 @@ const Header = ({ headData }) => {
           </Select>
         </Box>
         <Divider orientation="vertical" flexItem sx={{bgcolor: '#E9E9E9'}} />
-        <Box className="flex gap-0 items-center text-[#A445ED] justify-between">
-            {
+        <Box className="flex gap-0 items-center justify-between">
+            {       
                 themeMode && 
                 <Box 
                     component='img'

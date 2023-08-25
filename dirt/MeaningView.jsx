@@ -6,6 +6,44 @@ const MeaningView = ({ meaning }) => {
   return (
     <Box className="my-3">
             <Box>
+                {/*<Switch checked={themeMode} onClick={handleThemeChange}
+                    sx={{
+                        "&.MuiSwitch-root .MuiSwitch-switchBase": {
+                        bgcolor: `${themeMode && 'rgb(164,69,237)'}`,
+                        color: "#FFFFFF"
+                        },
+
+                        "&.MuiSwitch-root .Mui-checked": {
+                        color: "#FFFFFF"
+                        }
+                    }} 
+                    />
+
+                    <DarkModeOutlined sx={{ color: `${themeMode && 'rgb(164,69,237)'}` }}/>*/}
+              
+            {  
+                            /* Play icon design old
+                            
+                            themeMode &&
+                            <Box 
+                            component='img'
+                            alt="play"
+                            src="/assets/images/playbutton-dark.svg"
+                            className="w-12 h-12 flex items-start"
+                            onClick={handlePlay}
+                            sx={{'&:hover': '#A445ED', position:'relative', zIndex: 1}}
+                            /> 
+                            ||
+                            <Box 
+                            component='img'
+                            alt="play"
+                            src="/assets/images/icon-play.svg"
+                            className="w-12 h-12 flex items-start"
+                            onClick={handlePlay}
+                            sx={{'&:hover': '#A445ED', position:'relative', zIndex: 1}}
+                            /> */
+                        }
+                        
             
                 <Typography variant="body2"
                     className="text-[1.125rem] font-bold"
@@ -67,6 +105,8 @@ const MeaningView = ({ meaning }) => {
                     }
                 </Typography>
             </Box>
+
+
 
         </Box>
   )

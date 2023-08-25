@@ -1,15 +1,19 @@
-import { Box, Divider, 
-    Typography, List, ListSubheader, ListItem } from "@mui/material"
+import { Box, Divider, Typography, List, ListItem, Button, Link } from "@mui/material";
+//import useDictionary from "@/api/useDictionary";
 
-
-const MeaningView = ({ meaning }) => {
-
+const MeaningView = ({ meaningData }) => {
+    //const dictionaryData = useDictionary();
+    //const { fetchWord } = dictionaryData;
+    const {meaning, fetchWord} = meaningData
+    const handleSynonym = (text) => {
+        return fetchWord(text);
+    }
     return (
-    <Box className="my-3">
+    <Box sx={{ my:2 }}>
             <Box>
                 <Box className="w-auto">
                     <Typography variant="body2"
-                        className="text-[1.125rem] md:text-[1.5rem] font-bold"
+                        sx={{ fontSize:{xs: "1.125rem", md:"1.5rem"}, fontWeight:600, }}
                     >
                         {meaning.partOfSpeech}
                     </Typography>
@@ -23,17 +27,19 @@ const MeaningView = ({ meaning }) => {
             
             </Box>
 
-            <Box className="mb-2 text-[0.938rem] md:text-[1.125rem]">
-                <Typography variant="body2" className="mt-5 text-[1rem] md:text-[1.25rem] text-[#757575]">
+            <Box sx={{ mb:2, fontSize:{xs: "0.938rem", md:"1.125rem"} }}>
+                <Typography variant="body2" 
+                    sx={{ mt:3, fontSize:{xs: "1rem", md:"1.125rem"}, color:"#757575" }}
+                >
                     Meaning
                 </Typography>
                 <List sx = {{
-                        listStyleType: 'disc',
-                        pl: 2,
-                        
-                        '& .MuiListItem-root': {
-                        display: 'list-item',
-                        },
+                    listStyleType: 'disc',
+                    pl: 2,
+                    
+                    '& .MuiListItem-root': {
+                    display: 'list-item',
+                    },
                     }}
                 >
                     { meaning && meaning.definitions.map((value, index) =>(
@@ -51,13 +57,24 @@ const MeaningView = ({ meaning }) => {
                 </List>
             </Box>
             
-            <Box className="mt-2 mb-5 text-[1rem] md:text-[1.25rem]">
+            <Box sx={{ mt:3, mb:2, fontSize:{xs: "0.938rem", md:"1.125rem"} }} >
                 {meaning.synonyms.length > 0  && 
                 <Typography component='div' className="flex gap-x-5 gap-y-2 justify-start items-center flex-wrap" >
                     <span>{'Synonyms'}</span>
                     {
                         meaning.synonyms.map((synonym, index)=>(
-                            <span key={index} className="text-[#A445ED]">{synonym}</span>
+                            <Link 
+                                component="button"
+                                underline="hover"
+                                key={index} 
+                                sx={{ 
+                                    color: '#A445ED', 
+                                    textTransform: 'lowercase',
+                                }} 
+                                onClick={()=>handleSynonym(synonym)}
+                            >
+                                {synonym}
+                            </Link>
                         )) 
                     }
                 </Typography> }

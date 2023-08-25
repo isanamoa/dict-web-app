@@ -1,14 +1,15 @@
-import { Box, Typography, CardMedia, Tooltip, IconButton } from "@mui/material"
+import { Box, Typography, CardMedia } from "@mui/material"
 import MeaningView from "./MeaningView";
 import Footer from "../Footer/Footer";
 import { useState } from "react";
+import { PlayArrow } from "@mui/icons-material";
 
 const MainView = ({ mainData }) => {
-    const {themeMode, wordData} = mainData;
+    const {fetchWord, wordData} = mainData;
     const [playPhonetic, setPlayPhonetic] = useState('')
 
     const handlePlay = () =>{
-        wordData && wordData[0].phonetics?.length > 0 &&
+        wordData && wordData[0]?.phonetics?.length > 0 &&
         setPlayPhonetic(wordData[0].phonetics?.filter(value => value.audio != '')[0]?.audio);
         const playTime = setTimeout(() => {
             setPlayPhonetic(prev=>!prev);
@@ -19,15 +20,15 @@ const MainView = ({ mainData }) => {
  return (
     <Box className="w-full mt-6">
         <Box>
-            <Box className="flex justify-between items-center">
+            <Box className="flex justify-between items-center ">
                 <Box>
                     <Typography variant="h1"
                         sx={{fontSize:{xs:"2rem", md:"4rem"}, fontWeight:700}}
                     >
-                        {wordData && (wordData[0]?.word.charAt(0).toUpperCase() + wordData[0]?.word.slice(1))}
+                        {wordData && (wordData[0]?.word?.charAt(0).toUpperCase() + wordData[0]?.word?.slice(1))}
                     </Typography>
                     <Typography variant="body2"
-                        className="text-[1.125rem] md:text-[1.5rem] text-[#A445ED]"
+                        sx={{ fontSize:{xs: "1.125rem", md:"1.5rem"}, color:"#A445ED"}}
                     >
                         {wordData && wordData[0]?.phonetic}
                     </Typography>
@@ -36,33 +37,24 @@ const MainView = ({ mainData }) => {
                     wordData && wordData[0]?.phonetics?.length > 0 
                     &&
                     <Box sx={{position:"relative", }}>
-                            { 
-                                themeMode &&
-                                <Box 
-                                component='img'
-                                alt="play"
-                                src="/assets/images/playbutton-dark.svg"
-                                className="w-12 h-12 flex items-start"
-                                onClick={handlePlay}
-                                sx={{'&:hover': '#A445ED', position:'relative', zIndex: 1}}
-                                /> 
-                                ||
-                                <Box 
-                                component='img'
-                                alt="play"
-                                src="/assets/images/icon-play.svg"
-                                className="w-12 h-12 flex items-start"
-                                onClick={handlePlay}
-                                sx={{'&:hover': '#A445ED', position:'relative', zIndex: 1}}
-                                /> 
-                            }
-                            
-                            <CardMedia
-                            component="audio" 
-                            autoPlay
-                            src={playPhonetic}
-                            sx={{visibility: 'hidden', position:'absolute', zIndex: 0}}
-                            />
+
+                        <Box component="button" 
+                            sx={{ bgcolor:'#debdf8', color: '#A445ED', '&:hover': {bgcolor:'#A445ED', color:'#FFFFFF'}, 
+                                position:'relative', zIndex: 1, borderRadius: '50%', p:{xs:1, sm:2},
+                                display:'flex', justifyContent:'center', alignItems:'center' 
+                            }}
+                            onClick={handlePlay}
+                        >
+                            <PlayArrow />
+                        </Box>
+
+                        <CardMedia
+                        component="audio" 
+                        autoPlay
+                        src={playPhonetic}
+                        sx={{visibility: 'hidden', position:'absolute', zIndex: 0}}
+                        />
+
                     </Box>
                 }
                   
@@ -71,11 +63,11 @@ const MainView = ({ mainData }) => {
         </Box>
 
         {
-            wordData && wordData[0].meanings?.map((meaning, index) => <MeaningView key={index} meaning={meaning} />)
+            wordData && wordData[0]?.meanings?.map((meaning, index) => <MeaningView key={index} meaningData={{meaning, fetchWord}} />)
         }
             
 
-        <Footer sourceUrl={wordData && wordData[0].sourceUrls} />
+        <Footer sourceUrl={wordData && wordData[0]?.sourceUrls} />
         
     </Box>
   )

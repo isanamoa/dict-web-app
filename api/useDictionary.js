@@ -18,6 +18,7 @@ const useDictionary = () => {
                 setIsNotice(prev=>!prev);
                 data = await response.json();
             }else {
+                setIsNotice(false);
                 data = await response.json();
             }
             setWordData(data);

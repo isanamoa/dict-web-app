@@ -5,8 +5,8 @@ import { Box, CssBaseline, CircularProgress } from "@mui/material";
 import MainView from "@/components/Body/MainView";
 import Header from "@/components/Header/Header";
 import SearchBar from '@/components/Body/SearchBar';
-import useDictionary from "@/api/useDictionary";
 import ErrorControl from '@/components/Body/ErrorControl';
+import useDictionary from "@/api/useDictionary";
 
 export default function Home() {
   const [themeMode, setThemeMode] = useState(false)
@@ -59,7 +59,7 @@ export default function Home() {
               isNotice ? 
               <ErrorControl wordData={wordData} />
               :
-              <MainView mainData={{themeMode, wordData}}/>
+              <MainView mainData={{themeMode, wordData, fetchWord}}/>
             )
           }
 
