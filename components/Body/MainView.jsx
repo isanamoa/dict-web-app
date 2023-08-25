@@ -1,12 +1,14 @@
 import { Box, Typography, CardMedia } from "@mui/material"
 import MeaningView from "./MeaningView";
-import Footer from "../Footer/Footer";
+import Footer from "./Footer";
 import { useState } from "react";
 import { PlayArrow } from "@mui/icons-material";
 
 const MainView = ({ mainData }) => {
-    const {fetchWord, wordData} = mainData;
+    const {fetchWord, wordData, dfont} = mainData;
     const [playPhonetic, setPlayPhonetic] = useState('')
+
+    let sourceUrl = wordData && wordData[0]?.sourceUrls;
 
     const handlePlay = () =>{
         wordData && wordData[0]?.phonetics?.length > 0 &&
@@ -67,7 +69,7 @@ const MainView = ({ mainData }) => {
         }
             
 
-        <Footer sourceUrl={wordData && wordData[0]?.sourceUrls} />
+        <Footer footerData={{sourceUrl, dfont}} />
         
     </Box>
   )

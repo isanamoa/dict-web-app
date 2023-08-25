@@ -1,9 +1,9 @@
 import { Box, Divider, IconButton, Link, Tooltip, Typography } from "@mui/material"
 
-const Footer = ({ sourceUrl }) => {
-
+const Footer = ({ footerData }) => {
+    const {sourceUrl, dfont} = footerData;
   return (
-    <Box className="w-full mt-2 mb-5 text-[0.875rem]">
+    <Box className={`w-full mt-2 mb-5 text-[0.875rem] break-words font-${dfont}`}>
       <Divider />
       <Typography className="mt-3 underline">
         {'Source'}
