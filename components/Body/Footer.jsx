@@ -1,14 +1,14 @@
-import { Box, Divider, IconButton, Link, Tooltip, Typography } from "@mui/material"
+import { Box, Divider, IconButton, Link, Tooltip } from "@mui/material"
 
-const Footer = ({ footerData }) => {
-    const {sourceUrl, dfont} = footerData;
+const Footer = ({ sourceUrl }) => {
+
   return (
-    <Box className={`w-full mt-2 mb-5 text-[0.875rem] break-words font-${dfont}`}>
+    <Box className={`w-full mt-2 mb-5 text-[0.875rem] break-words`}>
       <Divider />
-      <Typography className="mt-3 underline">
+      <p className="mt-3 underline">
         {'Source'}
-      </Typography>
-      <Typography>
+      </p>
+      <p >
         {sourceUrl}
         <Link className="underline-none" href={sourceUrl} target="_blank"> 
           <Tooltip title="Open link in new tab">
@@ -22,7 +22,7 @@ const Footer = ({ footerData }) => {
             </IconButton>
           </Tooltip>
         </Link>
-      </Typography>    
+      </p>    
     </Box>
   )
 }

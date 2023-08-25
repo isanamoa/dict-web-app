@@ -58,26 +58,27 @@ const MeaningView = ({ meaningData }) => {
             </Box>
             
             <Box sx={{ mt:3, mb:2, fontSize:{xs: "0.938rem", md:"1.125rem"} }} >
-                {meaning.synonyms.length > 0  && 
-                <Typography component='div' className="flex gap-x-5 gap-y-2 justify-start items-center flex-wrap" >
-                    <span>{'Synonyms'}</span>
-                    {
-                        meaning.synonyms.map((synonym, index)=>(
-                            <Link 
-                                component="button"
-                                underline="hover"
-                                key={index} 
-                                sx={{ 
-                                    color: '#A445ED', 
-                                    textTransform: 'lowercase',
-                                }} 
-                                onClick={()=>handleSynonym(synonym)}
-                            >
-                                {synonym}
-                            </Link>
-                        )) 
-                    }
-                </Typography> }
+                { meaning.synonyms.length > 0  && 
+                    <p className="flex gap-x-5 gap-y-2 justify-start items-center flex-wrap" >
+                        <span>{'Synonyms'}</span>
+                        {
+                            meaning.synonyms.map((synonym, index)=>(
+                                <Link 
+                                    component="button"
+                                    underline="hover"
+                                    key={index} 
+                                    sx={{ 
+                                        color: '#A445ED', 
+                                        textTransform: 'lowercase',
+                                    }} 
+                                    onClick={()=>handleSynonym(synonym)}
+                                >
+                                    {synonym}
+                                </Link>
+                            )) 
+                        }
+                    </p> 
+                }
             </Box>
 
         </Box>

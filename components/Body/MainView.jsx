@@ -5,10 +5,8 @@ import { useState } from "react";
 import { PlayArrow } from "@mui/icons-material";
 
 const MainView = ({ mainData }) => {
-    const {fetchWord, wordData, dfont} = mainData;
+    const { wordData, fetchWord } = mainData;
     const [playPhonetic, setPlayPhonetic] = useState('')
-
-    let sourceUrl = wordData && wordData[0]?.sourceUrls;
 
     const handlePlay = () =>{
         wordData && wordData[0]?.phonetics?.length > 0 &&
@@ -69,7 +67,7 @@ const MainView = ({ mainData }) => {
         }
             
 
-        <Footer footerData={{sourceUrl, dfont}} />
+        <Footer sourceUrl={wordData && wordData[0]?.sourceUrls} />
         
     </Box>
   )
